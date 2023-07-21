@@ -12,6 +12,7 @@ class Player {
         this.width = width;
         //  height of the player
         this.height = height;
+        // direction of the player's moving horizontally
         // create the img tag fro the player, define src and default
         this.element = document.createElement('div');
         /* this.element.src = imgSrc; */
@@ -27,20 +28,74 @@ class Player {
         this.gameScreen.appendChild(this.element);
     }
 
-    move(){
-        // Update player's car position based on directionX and directionY
+    // function that limits the player's boundaries
+    stayInPlay() {
+        // Right Side boundary
+        if(this.left + this.width > this.gameScreen.offsetWidth){
+            this.left = this.gameScreen.offsetWidth - this.width;
+        } 
+
+        // Left side boundary
+        else if(this.left <0) {
+            this.left = 0;
+        }
+
+        // handle top and bottom borders
+        // bottom side boundary
+        if(this.top +this.height > this.gameScreen.offsetHeight){
+            this.top = this.gameScreen.offsetHeight - this.height;
         
-        this.left +=this.directionX;
-        this.top +=this.directionY;
+        // top side boundary 
+        }
+        else if (this.top < 0){
+            this.top = 0;
+        }
 
         this.updatePosition();
 
     }
 
+
     // Updates the Position of the car in the CSS
     updatePosition(){
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
+    }
+
+    gotPrize(getPrize){
+        // .getBoundinClientRect() return info about top, left, right, bottom, width, height of an html element
+
+        const playerRect = this.element.getBoundingClientRect();
+        const getPrizeRect = getPrize.element.getBoundingClientRect();
+
+        if(playerRect.left < getPrizeRect.right &&
+             playerRect.right>getPrizeRect.left &&
+             playerRect.top < getPrizeRect.bottom &&
+             playerRect.bottom > getPrizeRect.top)
+             {
+                return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    touchDepositArea(prizeCheck){
+        // .getBoundinClientRect() return info about top, left, right, bottom, width, height of an html element
+
+        const playerRect = this.element.getBoundingClientRect();
+        const prizeCheckRect = prizeCheck.element.getBoundingClientRect();
+
+        if(playerRect.left < prizeCheckRect.right &&
+             playerRect.right>prizeCheckRect.left &&
+             playerRect.top < prizeCheckRect.bottom &&
+             playerRect.bottom > prizeCheckRect.top)
+             {
+                return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 

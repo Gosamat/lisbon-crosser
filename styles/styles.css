@@ -1,0 +1,20 @@
+body {
+    padding: 0;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    display: none;
+}
+
+#game-screen {
+    display: none;
+    background-color: brown;
+    position: relative;
+}

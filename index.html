@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisbon Crosser</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <main>
         <!-- Initial screen of the page where the user will land and where they can start the game -->
         <div id="start-screen">
+            <h2> Lisbon Crosser Game</h2>
+            <button id="play-button">Play now!</button>
+            <button id="how-to-play-button">How to play?</button>
+            <button id="dont-play-button">Don't Play now!</button>
+            <h6>by Manel & Gonçalo</h6>
 
         </div>
-        <!--  -->
-        <div id="game-screen">
 
+        <!-- Game screen where the game will take place -->
+        <div id="game-container">
+
+            <div id="game-screen"></div>
         </div>
-
+        <!-- Screen after the player loses the game and where they can restart it -->
         <div id="end-screen">
 
         </div>
     </main>
+    <script type="text/javascript" src="js/player.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

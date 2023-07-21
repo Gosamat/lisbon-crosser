@@ -15,37 +15,33 @@ playButton.addEventListener('click',function(){
 howToPlayButton.addEventListener('click',function(){
     startGame();
 });
+
 dontPlayButton.addEventListener('click',function(){
     startGame();
 });
 
-// function to start the game, assiging the game variable to the Game class and initiating its start() function
+// function to start the game, assinging the game variable to the Game class and initiating its start() function
 function startGame() {
     console.log("start game");
     game = new Game();
     game.start();
 
   }
-
- 
-
-  // function that handles keydown events
-  function handleKeyDown (event){
-    const key = event.key;
-    const possibleKeystrokes = [
-      "ArrowLeft",
-      "ArrowUp",
-      "ArrowRight", 
-      "ArrowDown"
-    ]
-
-    // Check if the pressed key belongs to the array of possible keys
+  
+// function that handles keydown events
+function handleKeyDown (event){
+const key = event.key;
+const possibleKeystrokes = [
+    "ArrowLeft",
+    "ArrowUp",
+    "ArrowRight", 
+    "ArrowDown"
+]
+    // Player movement happens based only on the possible keystrokes
     if(possibleKeystrokes.includes(key)){
-      // Prevent the default actions from happening
-      // in this case, it's the scroll-up,-down,-left,-right in the browser window
       event.preventDefault();
 
-      // Only when we have a game loaded, we can move the player
+      // player only moves when game is loaded
       if(game){
         switch(key){
           case "ArrowLeft":
@@ -68,15 +64,7 @@ function startGame() {
       }
 
     }
-  }
-
-
-
-
-
- 
+  } 
+    // event listened to grab the input made by the user and translate it into the movement of the character
   window.addEventListener("keydown", handleKeyDown);
-
-
-
-};
+ };

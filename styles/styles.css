@@ -3,6 +3,17 @@ body {
     text-align: center;
 }
 
+body button {
+    font-size: 30px;
+    background-color: #d3cd2e;
+    color: #ffffff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
 main {
     display: flex;
     justify-content: center;
@@ -17,4 +28,8 @@ main {
     display: none;
     background-color: brown;
     position: relative;
+}
+#start-screen {
+    display: flex;
+    flex-direction: column;
 }

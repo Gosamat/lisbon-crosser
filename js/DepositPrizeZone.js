@@ -1,23 +1,24 @@
-class GetPrize {
+// Class for the zone where the player will need to deposit the prize
+class DepositPrizeZone {
 
     constructor(gameScreen) {
 
         this.gameScreen = gameScreen;
 
-        // appear at the toppest layer
-        this.top = 0;
+        // For the zone to appear in the lowest layer a.k.a the layer where the player starts the game.
+        this.top = 600;
         this.width = 650;
         this.height = 50;
 
-        // create the HTML element and default styling
+        //The HTML element and default styling of the zone (later hidden)
         this.element = document.createElement("div");
         this.element.style.position = "absolute";
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
         this.element.style.top = `${this.top}px`;
-        this.element.style.backgroundColor = 'green';
+        this.element.style.backgroundColor = 'yellow';
     
-        //append obstacles to the Game Screen
+        //append zone to the Game Screen
         this.gameScreen.appendChild(this.element);
     
     }

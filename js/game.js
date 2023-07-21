@@ -28,6 +28,7 @@ class Game {
 
         //  Check to see if Player got prize from prize area
          this.prizeInHand = false;
+         
         
        
         
@@ -61,6 +62,8 @@ class Game {
         this.player.stayInPlay();
         console.log("updating");
 
+        console.log(this.prizeInHand);
+
         // Check if player got the prize
         if (this.player.gotPrize(this.getPrize)){
             // When player reaches prize area, the property turns true.
@@ -69,7 +72,7 @@ class Game {
         }
 
         // Check if player deposited the prize
-        if (this.prizeInHand === true && touchDepositArea(this.depositPrize) === true){
+        if (this.prizeInHand === true && this.player.touchDepositArea(this.depositPrize) === true){
             // When player reaches the deposit area, remove prize in hand aka becomes false and add to total score.
             this.prizeInHand = false;
             console.log("Deposited Prize");

@@ -1,6 +1,6 @@
 class Player {
     
-    constructor( gameScreen, left, top, width, height, /*imgSrc(To add)*/ ){
+    constructor( gameScreen, left, top, width, height, imgSrc){
         
         this.gameScreen = gameScreen;   
 
@@ -14,9 +14,8 @@ class Player {
         this.height = height;
         // direction of the player's moving horizontally
         // create the img tag fro the player, define src and default
-        this.element = document.createElement('div');
-        /* this.element.src = imgSrc; */
-        this.element.style.backgroundColor = 'blue';
+        this.element = document.createElement('img');
+        this.element.src = imgSrc;
         this.element.style.position = 'absolute';
         //  set up default element's properties
         this.element.style.width = `${width}px`;
@@ -90,6 +89,24 @@ class Player {
              playerRect.right>prizeCheckRect.left &&
              playerRect.top < prizeCheckRect.bottom &&
              playerRect.bottom > prizeCheckRect.top)
+             {
+                return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    didCollide(obstacle){
+        // .getBoundinClientRect() return info about top, left, right, bottom, width, height of an html element
+
+        const playerRect = this.element.getBoundingClientRect();
+        const obstacleRect = obstacle.element.getBoundingClientRect();
+
+        if(playerRect.left < obstacleRect.right &&
+             playerRect.right>obstacleRect.left &&
+             playerRect.top < obstacleRect.bottom &&
+             playerRect.bottom > obstacleRect.top)
              {
                 return true;
         }

@@ -28,6 +28,9 @@ main {
     display: none;
     background-color: brown;
     position: relative;
+    overflow: hidden;
+    width: 650px;
+    height: 650px;
 }
 #start-screen {
     display: flex;

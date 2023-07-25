@@ -34,13 +34,7 @@ class Game {
 
         // Creating the obstacles properties/arrays
 
-        this.obstaclesFirstLine = [];
-        this.obstaclesSecondLine = [];
-        this.obstaclesThirdLine = [];
-        this.obstaclesFourthLine = [];
-        this.obstaclesFifthLine = [];
-
-        this.obstaclesArrays = [this.obstaclesFirstLine, this.obstaclesSecondLine, this.obstaclesThirdLine, this.obstaclesFourthLine,this.obstaclesFifthLine];
+        this.obstaclesArray = [];
 
         //define the height and width we want to apply to the gameScreen once game is running 
         // this.height = 650;
@@ -105,14 +99,11 @@ class Game {
 
         }
         
-        // Change all below to act on the objectsArrays variable
-        this.obstaclesArrays.forEach((currentArray)=>{
-
             // Check for collision and if an obstacle is still on the screen
-            for (let j = 0; j <currentArray.length; j++){
+            for (let j = 0; j <this.obstaclesArray.length; j++){
 
                 // Grabbing an obstacle and moving it downwards
-                const obstacle = currentArray[j];
+                const obstacle = this.obstaclesArray[j];
                 obstacle.move();
 
                 // Check if the player collided with an obstacle
@@ -131,34 +122,19 @@ class Game {
                     obstacle.element.remove();
     
                     // Remove the object from the array of obstacles
-                    currentArray.splice(j,1);
+                    this.obstaclesArray.splice(j,1);
     
                 }
             }
     
             // Update obstacles spawning for First Line
 
-            // let obstacleSpawnGap = 110;
-            // let spawnGapArrays = [110, 130, 150, 170, 190];
-            // let currentArrayIndex = this.obstaclesArrays.indexOf(currentArray);
-
-            // console.log (`array index ${currentArrayIndex}`);
-            // if (this.frameCount % spawnGap === 0 && currentArray.length < 3){
+            if (this.frameCount % 110 === 0 && this.obstaclesArray.length < 3){
     
-            //     currentArray.push(new Obstacle(this.gameScreen, 2, 50, 50, 500, 700));
-            //     console.log (`current frame time is ${this.frameCount}`);
+                this.obstaclesArray.push(new Obstacle(this.gameScreen, 2, 50, 50, 550, 700, "left"));
+                console.log (`current frame time is ${this.frameCount}`);
     
-            // }
-  
-            this.obstaclesGap (currentArray, 110, new Obstacle(this.gameScreen, 10, 50, 50, 500, 700, "left"));
-            this.obstaclesGap (currentArray, 110, new Obstacle(this.gameScreen, 11, 50, 50, 400, -100, "right"));
-            this.obstaclesGap (currentArray, 110, new Obstacle(this.gameScreen, 12, 50, 50, 300, 700, "left"));
-            console.log (this.obstaclesFirstLine.length);  //for testing
-            console.log (this.obstaclesSecondLine.length); //for testing
-            console.log (this.obstaclesThirdLine.length); //for testing
-
-        });
-
+            }
 
 
 
@@ -177,14 +153,5 @@ class Game {
 
 
     }
-
-    obstaclesGap (currentArray, spawnGap, obstacleObject) {
-        if (this.frameCount % spawnGap === 0 && currentArray.length < 3){
-
-            currentArray.push(obstacleObject);
-
-        };
-
-    };
 
 }

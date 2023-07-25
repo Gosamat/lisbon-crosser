@@ -23,6 +23,9 @@ class Game {
         // Creating Deposit zone property
         this.depositPrize = new DepositPrizeZone (this.gameScreen);
 
+        // Creating deathzone for second part of the level
+        this.deathZone = new DeathZone (this.gameScreen);
+
         // Creating the player property
         this.player = new Player(this.gameScreen, 300, 600, 50, 50,"./images/test.png");
 
@@ -34,7 +37,7 @@ class Game {
 
         // Creating the obstacles properties/arrays
 
-        this.obstaclesArray = [];
+        this.obstaclesArray = [[], [], [], [], []];
 
         //define the height and width we want to apply to the gameScreen once game is running 
         // this.height = 650;
@@ -81,6 +84,69 @@ class Game {
         this.frameCount ++;
     }
 
+    updateGroupObjects(arr, order){
+        // Check for collision and if an obstacle is still on the screen
+        for (let j = 0; j < arr.length; j++){
+
+            // Grabbing an obstacle and moving it downwards
+            const obstacle = arr[j];
+            obstacle.move();
+
+            // Check if the player collided with an obstacle
+            if (this.player.didCollide(obstacle)){
+                // What happens when player hits obstacle
+                this.player.left = 300;
+                this.player.top = 600;
+
+                // Reduce player's life by 1
+                this.lives--;
+
+            }
+            // Check if the obstacle is off the screen ( at the bottom)
+            else if(obstacle.left < -100 || obstacle.left+obstacle.width > 750){
+                // Remove the obstacle from the HTML
+                obstacle.element.remove();
+
+                // Remove the object from the array of obstacles
+                this.obstaclesArray[order].splice(j,1);
+
+            }
+        }
+
+        if (order == 0){
+            if (this.frameCount % 110 === 0 && this.obstaclesArray[0].length < 3){
+
+                this.obstaclesArray[0].push(new Obstacle(this.gameScreen, 2, 50, 50, 550, 700, "left"));
+                console.log (`current frame time is ${this.frameCount}`);
+    
+            }
+
+        }
+        else if(order == 1){
+            if (this.frameCount % 130 === 0 && this.obstaclesArray[1].length < 3){ 
+                this.obstaclesArray[1].push(new Obstacle(this.gameScreen, 2, 50, 50, 500, -100, "right"));
+            }
+        }
+
+        else if(order == 2){
+            if (this.frameCount % 130 === 0 && this.obstaclesArray[2].length < 3){ 
+                this.obstaclesArray[2].push(new Obstacle(this.gameScreen, 2.5, 50, 50, 450, 700, "left"));
+            }
+        }
+
+        else if(order == 3){
+            if (this.frameCount % 200 === 0 && this.obstaclesArray[3].length < 3){ 
+                this.obstaclesArray[3].push(new Obstacle(this.gameScreen, 3, 50, 50, 400, -100, "right"));
+            }
+        }
+
+        else if(order == 4){
+            if (this.frameCount % 130 === 0 && this.obstaclesArray[4].length < 3){ 
+                this.obstaclesArray[4].push(new Obstacle(this.gameScreen, 3.5, 50, 50, 350, 700, "left"));
+            }
+        }
+    }
+
     update (){
 
         this.player.stayInPlay();
@@ -99,42 +165,24 @@ class Game {
 
         }
         
-            // Check for collision and if an obstacle is still on the screen
-            for (let j = 0; j <this.obstaclesArray.length; j++){
+        this.updateGroupObjects(this.obstaclesArray[0], 0)
+        this.updateGroupObjects(this.obstaclesArray[1], 1)
+        this.updateGroupObjects(this.obstaclesArray[2], 2)
+        this.updateGroupObjects(this.obstaclesArray[3], 3)
+        this.updateGroupObjects(this.obstaclesArray[4], 4)
 
-                // Grabbing an obstacle and moving it downwards
-                const obstacle = this.obstaclesArray[j];
-                obstacle.move();
-
-                // Check if the player collided with an obstacle
-                if (this.player.didCollide(obstacle)){
-                    // What happens when player hits obstacle
-                    this.player.left = 300;
-                    this.player.top = 600;
-    
-                    // Reduce player's life by 1
-                    this.lives--;
-    
-                }
-                // Check if the obstacle is off the screen ( at the bottom)
-                else if(obstacle.left < -100 || obstacle.left+obstacle.width > 750){
-                    // Remove the obstacle from the HTML
-                    obstacle.element.remove();
-    
-                    // Remove the object from the array of obstacles
-                    this.obstaclesArray.splice(j,1);
-    
-                }
-            }
     
             // Update obstacles spawning for First Line
 
-            if (this.frameCount % 110 === 0 && this.obstaclesArray.length < 3){
+
+            /*if (this.frameCount % 110 === 0 && this.obstaclesArray[1].length < 3){
     
                 this.obstaclesArray.push(new Obstacle(this.gameScreen, 2, 50, 50, 550, 700, "left"));
                 console.log (`current frame time is ${this.frameCount}`);
     
-            }
+            }*/
+
+
 
 
 

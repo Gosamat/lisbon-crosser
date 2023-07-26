@@ -1,13 +1,6 @@
 class Game {
     constructor(){
 
-        // TO DO
-        // Make function to display other page for the How-To button
-        // Make function to display other "joke" page
-        // Make a credit page/section for any used assets.
-
-        ////////////////////////////////////////////////////////////
-
         // Variables to later refer to the different possible screens of the webpage
         this.startScreen = document.getElementById('start-screen');
         this.gameScreen = document.getElementById('game-screen');
@@ -39,8 +32,8 @@ class Game {
         // Game State Boolean
         this.gameIsOver = false;
 
-        // Tracker if player is in the upper level(aka deathZone)
-        this.inDeathZone = false;
+        // Tracker if player is on top of an obstacle)
+        this.playerInObstacle = false;
 
 
         // Creating the obstacles properties/arrays
@@ -147,66 +140,62 @@ class Game {
 
         else if(order == 4){
             if (this.frameCount % 130 / (this.gamespeed*100)  === 0 && this.obstaclesArray[4].length < 3){ 
-                this.obstaclesArray[4].push(new Obstacle(this.gameScreen, 3.5 * this.gamespeed, 50, 100, 350, 650, "left", "./images/truck.png"));
+                this.obstaclesArray[4].push(new Obstacle(this.gameScreen, 3.5 * this.gamespeed, 50, 100, 350, 650, "left", "./images/truck1.png"));
             }
         }
     }
 
-    updateGroupObjectsWater(zone,arr, order){
+    updateGroupObjectsWater(arr, order, obstaclesArray) {
         // Check for collision and if an obstacle is still on the screen
+      
+        for (let j = 0; j < arr.length; j++) {
+          // Grabbing an obstacle and moving it downwards
+          const obstacle = arr[j];
+          obstacle.move();
+      
+          // Check if the obstacle is off the screen (at the bottom)
+          if (obstacle.left < -200 || obstacle.left + obstacle.width > 850) {
+            // Remove the obstacle from the HTML
+            obstacle.element.remove();
+      
+            // Remove the object from the array of obstacles
+            obstaclesArray[order].splice(j, 1);
+          }
+        }
+      
+        // UNCOMMENT IF TESTS DO NOT WORK
+        // if (arr.some(obstacle => this.player.didCollide(obstacle))) {
+        //   // What happens when player hits obstacle
+        //   if(!this.playerInObstacle){
+        //     this.playerInObstacle = true;
+        //   }
+        //   const collidedObstacle = arr.find(obstacle => this.player.didCollide(obstacle));
+        //   if (collidedObstacle.moveDirection === "left") {
+        //     this.player.left -= collidedObstacle.speed;
+        //   } else if (collidedObstacle.moveDirection =32== "right") {
+        //     this.player.left += collidedObstacle.speed;
+        //   }
+        // } 
+        // console.log(this.playerInObstacle)
+            // console.log(`obstacle 2: ${this.player.didCollide(obstacle2)}`);
+            // console.log(`obstacle 3: ${this.player.didCollide(obstacle3)}`);
+
+
+
+                // if (this.playerInObstacle === true) {
+                //     console.log("collided with obstacle");
+                //     // this.player.didCollide(zone) && 
+                //     if (obstacle.moveDirection === "left") {
+                //         this.player.left -= obstacle.speed;
+                //         return;
+                //     } 
+                //     else if (obstacle.moveDirection === "right") {
+                //         this.player.left += obstacle.speed;
+                //         return;
+                //     }
+                // }
+            
         
-        for (let j = 0; j < arr.length; j++){
-
-            // Grabbing an obstacle and moving it downwards
-            const obstacle = arr[j];
-            const obstacle1 = arr[0];
-            const obstacle2 = arr[1];
-            const obstacle3 = arr[2];
-            obstacle.move();
-
-            // Check if the obstacle is off the screen ( at the bottom)
-            if(obstacle.left < -200 || obstacle.left+obstacle.width > 850){
-                // Remove the obstacle from the HTML
-                obstacle.element.remove();
-
-                // Remove the object from the array of obstacles
-                this.obstaclesArray[order].splice(j,1);
-            }
-
-
-            if(this.player.didCollide(zone) && !this.player.didCollide(obstacle)){
-                console.log("touched zone")
-
-                if (this.player.didCollide(obstacle)) {
-                    console.log("Riding");
-                    // this.player.didCollide(zone) && 
-                    if (obstacle.moveDirection === "left") {
-                        this.player.left -= obstacle.speed;
-                        return;
-                    } 
-                    else if (obstacle.moveDirection === "right") {
-                        this.player.left += obstacle.speed;
-                        return;
-                    }
-                }
-
-                else if (!this.player.didCollide(obstacle)) {
-
-                    console.log("no touching");
-                    // What happens when player hits obstacle
-                    this.player.left = 300;
-                    this.player.top = 600;
-                    // Reduce player's life by 1
-                    this.lives --;
-                    this.prizeInHand = false;
-                    return;
-                }
-                     
-            }
-
-
-
-
             // if (this.player.left >= obstacle1.left
             //     && this.player.left <= (obstacle1.left + obstacle1.width)
             //     && this.player.top  >= obstacle1.top 
@@ -296,36 +285,32 @@ class Game {
             //     this.prizeInHand = false;
             //     return;
             // }
-
-            
-    }
-
         if(order == 5){
             if (this.frameCount % 200 / (this.gamespeed*20) === 0 && this.obstaclesArray[5].length < 3){ 
-                this.obstaclesArray[5].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 51, 150, 250, 651, "left"));
+                this.obstaclesArray[5].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 150, 250, 650, "left", "./images/truck2.png"));
             }
         }
 
         if(order == 6){
             if (this.frameCount % 150 / (this.gamespeed*20)  === 0 && this.obstaclesArray[6].length < 3){ 
-                this.obstaclesArray[6].push(new Obstacle(this.gameScreen, 1.5 * this.gamespeed, 51, 100, 200, -100, "right"));
+                this.obstaclesArray[6].push(new Obstacle(this.gameScreen, 1.5 * this.gamespeed, 50, 100, 200, -100, "right", "./images/truck2.png"));
             }
         }
 
         if(order == 7){
             if (this.frameCount % 150 / (this.gamespeed*20)  === 0 && this.obstaclesArray[7].length < 3){ 
-                this.obstaclesArray[7].push(new Obstacle(this.gameScreen, 2.5 * this.gamespeed, 51, 200, 150, 650, "left"));
+                this.obstaclesArray[7].push(new Obstacle(this.gameScreen, 2.5 * this.gamespeed, 50, 200, 150, 650, "left", "./images/truck2.png"));
             }
         }
 
         if(order == 8){
             if (this.frameCount % 150 / (this.gamespeed*20)  === 0 && this.obstaclesArray[8].length < 3){ 
-                this.obstaclesArray[8].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 51, 100, 100, -100, "right"));
+                this.obstaclesArray[8].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 100, 100, -100, "right", "./images/truck2.png"));
             }
         }
         if(order == 9){
             if (this.frameCount % 150 / (this.gamespeed*20)  === 0 && this.obstaclesArray[9].length < 3){ 
-                this.obstaclesArray[9].push(new Obstacle(this.gameScreen, 3.5 * this.gamespeed, 51, 150, 50, 650, "left"));
+                this.obstaclesArray[9].push(new Obstacle(this.gameScreen, 3.5 * this.gamespeed, 50, 150, 50, 650, "left",  "./images/truck2.png"));
             }
         }
     }
@@ -438,13 +423,6 @@ class Game {
 
     update (){
 
-
-        // check if player is inside of deathzone and update the appropriate boolean state
-        if (this.player.didCollide(this.deathZone) && this.inDeathZone === false){
-            this.inDeathZone = true;
-
-        }
-
         // Bonus: scores and lives
         let score = document.getElementById('score');
         let lives = document.getElementById('lives');
@@ -481,11 +459,65 @@ class Game {
         this.updateGroupObjectsGround(this.obstaclesArray[3], 3)
         this.updateGroupObjectsGround(this.obstaclesArray[4], 4)
 
-        this.updateGroupObjectsWater(this.deathZone, this.obstaclesArray[5], 5)
-        // this.updateGroupObjectsWater(this.deathZone, this.obstaclesArray[6], 6)
-        // this.updateGroupObjectsWater(this.deathZone, this.obstaclesArray[7], 7)
-        // this.updateGroupObjectsWater(this.deathZone, this.obstaclesArray[8], 8)
-        // this.updateGroupObjectsWater(this.deathZone, this.obstaclesArray[9], 9)
+        // UNCOMMENT IF TESTS DO NOT WORK
+        this.updateGroupObjectsWater(this.obstaclesArray[5], 5, this.obstaclesArray)
+        this.updateGroupObjectsWater(this.obstaclesArray[6], 6, this.obstaclesArray)
+        this.updateGroupObjectsWater(this.obstaclesArray[7], 7, this.obstaclesArray)
+        this.updateGroupObjectsWater(this.obstaclesArray[8], 8, this.obstaclesArray)
+        this.updateGroupObjectsWater(this.obstaclesArray[9], 9, this.obstaclesArray)
+
+        // Test 1 with this method
+        let collisionCheck = false;
+
+        if (this.obstaclesArray[5].some(obstacle => this.player.didCollide(obstacle))   
+        || this.obstaclesArray[6].some(obstacle => this.player.didCollide(obstacle))
+        || this.obstaclesArray[7].some(obstacle => this.player.didCollide(obstacle))
+        || this.obstaclesArray[8].some(obstacle => this.player.didCollide(obstacle))
+        || this.obstaclesArray[9].some(obstacle => this.player.didCollide(obstacle))) {
+            
+            collisionCheck = true;
+            const collidedObstacle = this.obstaclesArray[5].find(obstacle => this.player.didCollide(obstacle))
+            || this.obstaclesArray[6].find(obstacle => this.player.didCollide(obstacle))
+            || this.obstaclesArray[7].find(obstacle => this.player.didCollide(obstacle))
+            || this.obstaclesArray[8].find(obstacle => this.player.didCollide(obstacle))
+            || this.obstaclesArray[9].find(obstacle => this.player.didCollide(obstacle));
+
+            if (collidedObstacle.moveDirection === "left") {
+                this.player.left -= collidedObstacle.speed;
+            } else if (collidedObstacle.moveDirection === "right") {
+                this.player.left += collidedObstacle.speed;
+            }
+        }
+        console.log( collisionCheck);
+
+        // Test 2 with this method
+        // let collisionCheck = this.obstaclesArray[5].some(obstacle => this.player.didCollide(obstacle))   
+        // || this.obstaclesArray[6].some(obstacle => this.player.didCollide(obstacle))
+        // || this.obstaclesArray[7].some(obstacle => this.player.didCollide(obstacle))
+        // || this.obstaclesArray[8].some(obstacle => this.player.didCollide(obstacle))
+        // || this.obstaclesArray[9].some(obstacle => this.player.didCollide(obstacle));
+
+        
+
+        //  test result
+        if(!collisionCheck 
+        && this.player.top >= 50 && this.player.top < 300 ){
+            this.player.left = 300;
+            this.player.top = 600;
+            // Reduce player's life by 1
+            this.lives--;
+            this.prizeInHand = false;
+            collisionCheck = false;
+        }
+
+        // UNCOMMENT IF TESTS DO NOT WORK
+        // if(this.playerInObstacle === false && this.player.top > 50 && this.player.top < 300){
+        //     // What happens when player hits obstacle
+        //     this.player.left = 300;
+        //     this.player.top = 600;
+        //     // Reduce player's life by 1
+        //     this.lives--;
+        // }
 
         // // Check if player deposited the prize
         if (this.prizeInHand === true && this.player.touchDepositArea(this.depositPrize) === true){
@@ -494,7 +526,7 @@ class Game {
             this.prizeInHand = false;
             this.score ++;
             this.gamespeed += 0.2;
-            console.log (this.gamespeed);
+            console.log (`Game speed has now been increased to${this.gamespeed}`);
             // console.log(`current score is ${this.score}`);
 
             // console.log("Deposited Prize"); // just for tests

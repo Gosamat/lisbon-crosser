@@ -48,7 +48,6 @@ main {
 }
 
 #player{
-    /* position: absolute; */
     z-index: 2;
 }
 

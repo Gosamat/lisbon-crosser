@@ -1,16 +1,17 @@
-//  class for the zone where the player will gain the prize upon reaching
+//  class for the zone where the player will acquire a prize upon reaching
+// Takes place at the highest layer of the gamescreen with a "height" of 50.
 class GetPrizeZone {
 
     constructor(gameScreen) {
 
         this.gameScreen = gameScreen;
 
-        // ensure that the zone for getting the prize appears at the top of the screen in the last layer reachable by the player
+        // Parameters for location of zone
         this.top = 0;
         this.width = 650;
         this.height = 50;
 
-        // create the HTML elements and default styling of the zone (later hidden)
+        // create the HTML elements and default styling of the zone
         this.element = document.createElement("div");
         this.element.style.position = "absolute";
         this.element.style.width = `${this.width}px`;

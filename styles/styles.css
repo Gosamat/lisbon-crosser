@@ -26,13 +26,33 @@ main {
 
 #game-screen {
     display: none;
-    background-color: brown;
+    background-color: rgb(54, 54, 54);
     position: relative;
     overflow: hidden;
     width: 650px;
     height: 650px;
+    background-image: url("../images/gameScreen.png");
+    
 }
 #start-screen {
     display: flex;
     flex-direction: column;
 }
+
+#end-screen {
+    display: none;
+
+}
+#victory-screen{
+    display: none;
+}
+
+#player{
+    /* position: absolute; */
+    z-index: 2;
+}
+
+#obstacles{
+    z-index: 1;
+}
+

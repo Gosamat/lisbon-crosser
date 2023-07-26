@@ -15,6 +15,7 @@ class Player {
         // direction of the player's moving horizontally
         // create the img tag fro the player, define src and default
         this.element = document.createElement('img');
+        this.element.setAttribute("id", "player");
         this.element.src = imgSrc;
         this.element.style.position = 'absolute';
         //  set up default element's properties
@@ -114,5 +115,24 @@ class Player {
             return false;
         }
     }
+
+    collideBlue(obstacle){
+        // .getBoundinClientRect() return info about top, left, right, bottom, width, height of an html element
+
+        const playerRect = this.element.getBoundingClientRect();
+        const obstacleRect = obstacle.element.getBoundingClientRect();
+
+        if(playerRect.left < obstacleRect.right &&
+             playerRect.right>obstacleRect.left &&
+             playerRect.top < obstacleRect.bottom &&
+             playerRect.bottom > obstacleRect.top)
+             {
+                return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
 

@@ -1,8 +1,10 @@
 window.onload = function () {
 // Variables for each button so we can easily call them.
 let playButton = document.getElementById('play-button');
-let howToPlayButton = document.getElementById('how-to-play-button');
 let dontPlayButton = document.getElementById('dont-play-button');
+let restartButtonLose = document.getElementById("restart-button-lose");
+let restartButtonWin = document.getElementById("restart-button-win");
+
 
 // Declare the variable that will be the game itself
 let game;
@@ -12,13 +14,20 @@ playButton.addEventListener('click',function(){
     startGame();
 });
 
-howToPlayButton.addEventListener('click',function(){
-    startGame();
-});
-
 dontPlayButton.addEventListener('click',function(){
     startGame();
 });
+
+restartButtonLose.addEventListener('click', function (){
+    console.log("clicked button")
+    location.reload();
+  });
+
+  restartButtonWin.addEventListener('click', function (){
+    console.log("clicked button")
+    location.reload();
+  });
+
 
 // function to start the game, assinging the game variable to the Game class and initiating its start() function
 function startGame() {

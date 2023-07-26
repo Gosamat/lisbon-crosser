@@ -12,28 +12,43 @@
         <div id="start-screen">
             <h2> Lisbon Crosser Game</h2>
             <button id="play-button">Play now!</button>
-            <button id="how-to-play-button">How to play?</button>
             <button id="dont-play-button">Don't Play now!</button>
+            <div id="Instructions">
+                <h3>Instructions</h3>
+                <p>You're in Lisbon and craving 5 pastéis de nata.</p>
+                <p>Get ready to cross the busy Lisbon traffic and the Tagus river to get that sweet sweet pastél de nata</p>
+            </div>
             <h6>by Manel & Gonçalo</h6>
-
         </div>
 
         <!-- Game screen where the game will take place -->
         <div id="game-container">
-
+            <div>
+                <h2>Stats</h2>
+                <p>Score: <span id="score">0</span></p>
+                <p>Lives: <span id="lives">3</span></p>
+            </div>
             <div id="game-screen"></div>
         </div>
         <!-- Screen after the player loses the game and where they can restart it -->
         <div id="end-screen">
-
+            <h1>Game Over</h1>
+            <br />
+            <button id="restart-button-lose">Restart</button>
+        </div>
+        <div id="victory-screen">
+            <h1>You did it, good job, proud of you!</h1>
+            <br />
+            <button id="restart-button-win">Play again?</button>
         </div>
     </main>
+    <script type="text/javascript" src="js/player.js"></script>
     <script type="text/javascript" src="js/death-zone.js"></script>
     <script type="text/javascript" src="js/obstacles.js"></script>
     <script type="text/javascript" src="js/DepositPrizeZone.js"></script>
     <script type="text/javascript" src="js/GetPrizeZone.js"></script>
-    <script type="text/javascript" src="js/player.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+
 </body>
 </html>

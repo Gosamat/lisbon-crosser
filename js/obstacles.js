@@ -1,5 +1,5 @@
 class Obstacle {
-    constructor(gameScreen, speed, height, width, top, startPosition, moveDirection /* imgSrc */){
+    constructor(gameScreen, speed, height, width, top, startPosition, moveDirection, imgSrc){
         
         this.gameScreen = gameScreen;
         this.speed = speed;
@@ -15,9 +15,9 @@ class Obstacle {
         // Define obstacle speed on the Y axis
 
         // create the HTML element and default styling
-        this.element = document.createElement("div");
-        this.element.style.backgroundColor = 'pink';
-        // this.element.src = imgSrc;
+        this.element = document.createElement("img");
+        this.element.src = imgSrc;
+        this.element.setAttribute("id", "obstacles");
         this.element.style.position = "absolute";
         this.element.style.width = `${width}px`;
         this.element.style.height = `${height}px`;

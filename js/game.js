@@ -25,6 +25,7 @@ class Game {
         // Controls of the gamespeed
         this.gamespeed = 1;
 
+
         // Player's score system
         this.score = 0;
 
@@ -219,6 +220,8 @@ class Game {
     // this applies to score, lives, winning condition, losing condition and collision checks for the water zone.
     update (){
 
+        console.log (this.gamespeed);
+
         // Set background to darken when the the gameScreen is running
         if(this.gameScreen.style.display === "block" 
         || this.victoryScreen.style.display === "block" 
@@ -309,8 +312,6 @@ class Game {
                 this.player.left += collidedObstacle.speed;
             }
         }
-        console.log( collisionCheck);
-
         if(!collisionCheck 
         && this.player.top >= 50 && this.player.top < 300 ){
             this.player.left = 300;

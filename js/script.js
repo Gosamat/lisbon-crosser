@@ -19,7 +19,7 @@ instructionsButton.addEventListener('click',function(){
 });
 
 credtisbutton.addEventListener('click',function(){
-  cre();
+  credits();
 });
 
 for(let i = 0; i<restartButton.length; i++){

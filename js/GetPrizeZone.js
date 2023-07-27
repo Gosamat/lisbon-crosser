@@ -17,7 +17,6 @@ class GetPrizeZone {
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
         this.element.style.top = `${this.top}px`;
-        this.element.style.backgroundColor = 'green';
     
         //append the zone to the Game Screen
         this.gameScreen.appendChild(this.element);

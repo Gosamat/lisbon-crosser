@@ -1,6 +1,6 @@
 class Player {
     
-    constructor( gameScreen, left, top, width, height, imgSrc){
+    constructor( gameScreen, left, top, width, height){
         
         this.gameScreen = gameScreen;   
 
@@ -16,8 +16,8 @@ class Player {
         // create the img tag fro the player, define src and default
         this.element = document.createElement('img');
         this.element.setAttribute("id", "player");
-        this.element.src = imgSrc;
         this.element.style.position = 'absolute';
+        this.element.src = "/images/characterBack.png";
         //  set up default element's properties
         this.element.style.width = `${width}px`;
         this.element.style.height = `${height}px`;
@@ -92,6 +92,7 @@ class Player {
              playerRect.bottom > prizeCheckRect.top)
              {
                 return true;
+
         }
         else {
             return false;
@@ -116,24 +117,4 @@ class Player {
             return false;
         }
     }
-
-    // collideBlue(obstacle){
-    //     // .getBoundinClientRect() return info about top, left, right, bottom, width, height of an html element
-
-    //     const playerRect = this.element.getBoundingClientRect();
-    //     const obstacleRect = obstacle.element.getBoundingClientRect();
-
-    //     if(playerRect.left < obstacleRect.right &&
-    //          playerRect.right>obstacleRect.left &&
-    //          playerRect.top < obstacleRect.bottom &&
-    //          playerRect.bottom > obstacleRect.top)
-    //          {
-    //             return true;
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    // }
-
 }
-

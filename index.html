@@ -5,41 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisbon Crosser</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
 </head>
 <body>
     <main>
         <!-- Initial screen of the page where the user will land and where they can start the game -->
         <div id="start-screen">
-            <h2> Lisbon Crosser Game</h2>
-            <button id="play-button">Play now!</button>
-            <button id="dont-play-button">Don't Play now!</button>
-            <div id="Instructions">
-                <h3>Instructions</h3>
-                <p>You're in Lisbon and craving 5 pastéis de nata.</p>
-                <p>Get ready to cross the busy Lisbon traffic and the Tagus river to get that sweet sweet pastél de nata</p>
+            <img src="./images/logo-lisbon-crosser.png" alt="logo">
+            <br>
+            <div class="button-box">
+                <button id="play-button">Play now!</button>
+                <button id="instructions-button">Instructions</button>
+                <button id="credits-button">Credits</button>
+
             </div>
-            <h6>by Manel & Gonçalo</h6>
         </div>
 
         <!-- Game screen where the game will take place -->
         <div id="game-container">
-            <div>
-                <h2>Stats</h2>
-                <p>Score: <span id="score">0</span></p>
-                <p>Lives: <span id="lives">3</span></p>
+            <div id="player-hearts">
+                <h3 id="health-counter">Health:</h3>
+                <img id="heart-1" src="./images/player-hearts.png" alt="">
+                <img id="heart-2" src="./images/player-hearts.png" alt="">
+                <img id="heart-3" src="./images/player-hearts.png" alt="">
             </div>
             <div id="game-screen"></div>
+            <h3 id="pasteis-counter">Pastéis:</h3>
         </div>
         <!-- Screen after the player loses the game and where they can restart it -->
         <div id="end-screen">
             <h1>Game Over</h1>
             <br />
-            <button id="restart-button-lose">Restart</button>
+            <button class="restart-button">Restart</button>
+        </div>
+        <div id="instructions-screen">
+            <div class="text-box">
+                <!-- <p>You're in Lisbon and specifically craving 5 pastéis de nata.</p>
+                <p>Get ready to cross the busy Lisbon traffic and the Tagus river to get those sweet sweet pastéis de nata and bring them back home</p> -->
+            </div>
+            <h3>Instructions</h3>
+            <ul>
+                <li><img src="./images/Car1-test2-blue.png" alt="car">Avoid the cars or you'll get run over</li>
+        
+                <li><img src="./images/truck1.png" alt="truck">Avoid the trucks or you will also get run over</li>
+                
+                <li><img src="./images/boat1blue.png" alt="boat">To cross the river, you are going to have to jump on the boats, if you miss, you'll drown</li>
+                
+                <li><img src="./images/pastel.png" alt="pastel-de-nata">Once you have a pastél de nata, you have to bring it back to the start</li>
+                
+                <li class="instructions-motivation"><strong>Get 5 of them to win!</strong></li>
+            </ul>
+            <button class="restart-button">Back to menu?</button>
         </div>
         <div id="victory-screen">
             <h1>You did it, good job, proud of you!</h1>
             <br />
-            <button id="restart-button-win">Play again?</button>
+            <button class="restart-button">Play again?</button>
+        </div>
+        <div id="credits-screen">
+            <h3>Credits</h3>
+            <div class="coding-credits">
+                <ul>
+                    <li><strong>Coding</strong></li>
+                    <li>Manueal Serraga</li>
+                 <li>Gonçalo Matias</li>
+                </ul>
+                <ul>
+                    <li><strong>Photoshop</strong></li>
+                    <li>Manuel Serraga</li>
+                    <li>Gonçalo Matias</li>
+                </ul>
+            </div>
+            <div class="remaining-credits">
+            <ul>
+                <li><strong>Assets</strong></li>
+                <li>big boats and player: Gamefreak</li>
+                <li>medium boats: spaceemotion from DeviantArt</li>
+                <li>cars: Kenney from kenney-assets.itch.io</li>
+                <li>Interface: Mounir Tohami from mounirtohami.itch.io</li>
+            </ul>
+            <ul>
+                <li><strong>Special thanks to:</strong></li>
+                <li>Ironhack</li>
+                <li>Pastéis de nata</li>
+            </ul>
+            <h4>Find us on:</h4>
+            <ul>
+                <li>Gonçalo Matias</li>
+                <li>Manuel Serraga</li>
+            </ul>
+        </div>
+
+            <button class="restart-button">Back to menu?</button>
         </div>
     </main>
     <script type="text/javascript" src="js/player.js"></script>

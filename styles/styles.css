@@ -1,18 +1,17 @@
+*{
+    font-family: VT323;
+    font-size: 30px;
+    text-shadow:  2px 2px rgba(0, 0, 0,0.5);
+    color: white;
+}
 body {
     padding: 0;
     text-align: center;
-}
+    font-family: VT323;
+    background-image: url("../images/Background.png");
+    background-size:cover;  
 
-body button {
-    font-size: 30px;
-    background-color: #d3cd2e;
-    color: #ffffff;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
+}
 
 main {
     display: flex;
@@ -20,8 +19,87 @@ main {
     align-items: center;
 }
 
+.button-box {
+    position: relative;
+    width: 300px;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-image: url("../images/start-menu-button-box.png");
+    background-size:contain;    
+   
+
+}
+
+#play-button{
+    background-image: url("../images/button-background.png");
+    background-size: cover;
+    width: 225px;
+    height: 50px;
+    margin-top: 70px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 10px;
+    border: none;
+}
+
+#instructions-button{
+    background-image: url("../images/button-background.png");
+    background-size: cover;
+    width: 225px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 10px;
+    border: none;
+}
+
+#credits-button{
+    background-image: url("../images/button-background.png");
+    background-size: cover;
+    width: 225px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 10px;
+    margin-bottom: 70px;
+    border: none;
+}
+.restart-button {
+    background-image: url("../images/button-background.png");
+    background-size: cover;
+    width: 225px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 70px;
+    border: none;
+}
+
 #game-container {
+    background-image: url("../images/border.png");
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: top;
+    width: 900px;
+    height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     display: none;
+}
+
+#player{
+    z-index: 2;
 }
 
 #game-screen {
@@ -29,6 +107,8 @@ main {
     background-color: rgb(54, 54, 54);
     position: relative;
     overflow: hidden;
+    margin-top: 125px;
+    margin-left: 125px;
     width: 650px;
     height: 650px;
     background-image: url("../images/gameScreen.png");
@@ -37,6 +117,8 @@ main {
 #start-screen {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #end-screen {
@@ -46,10 +128,141 @@ main {
 #victory-screen{
     display: none;
 }
+#instructions-screen, #end-screen, #victory-screen, #credits-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-image: url("../images/border.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 840px;
+    height: 838px;
 
-#player{
-    z-index: 2;
 }
+
+.text-box { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+#instructions-screen p {
+    font-size: 20px;
+    width: 600px;
+    margin: 5px;
+    
+}
+
+#instructions-screen h3 {
+    margin: 5px;
+    
+}
+
+#credits-screen ul li{
+    font-size: 18px;
+}
+
+#credits-screen ul li strong{
+    font-size: 23px;
+}
+
+#credits-screen ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+#credits-screen h3{
+    margin: 130px 0 0 0;
+}
+
+.coding-credits {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 200px;
+    margin-right: 200px;
+    align-items: center;
+}
+
+.remaining-credits {
+    margin-top: -10px;
+}
+
+#credits-screen .restart-button {
+    margin-top: -30px;
+
+}    
+
+#player-hearts {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    left: 435px;
+    top: 55px;
+    text-align: center;
+}
+
+#player-hearts img {
+    margin-right: 10px;
+    height: 40px;
+}
+#health-counter {
+    margin: 0 10px 0 0;
+    text-align: center;
+}
+
+#pasteis-counter {
+    margin: 0 10px 0 0;
+    text-align: center;
+    position: absolute;
+    left: 435px;
+    top: 820px;
+
+
+}
+
+#instructions-screen ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+
+#instructions-screen ul li {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+}
+
+.instructions-motivation {
+    margin-top: 40px;
+}
+
+#instructions-screen ul li img {
+
+    padding-bottom: 5px;
+}
+
+
+
+
+
 
 #obstacles{
     z-index: 1;

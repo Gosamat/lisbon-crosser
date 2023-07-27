@@ -2,7 +2,7 @@ window.onload = function () {
 // Variables for each button so we can easily call them.
 let playButton = document.getElementById('play-button');
 let instructionsButton = document.getElementById('instructions-button');
-let credtisbutton = document.getElementById('credits-button');
+let creditsbutton = document.getElementById('credits-button');
 let restartButton = document.querySelectorAll(".restart-button");
 
 
@@ -18,7 +18,7 @@ instructionsButton.addEventListener('click',function(){
     instructions();
 });
 
-credtisbutton.addEventListener('click',function(){
+creditsbutton.addEventListener('click',function(){
   credits();
 });
 

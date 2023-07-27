@@ -8,17 +8,18 @@ class Game {
         this.victoryScreen = document.getElementById('victory-screen');
         this.gameContainer = document.getElementById ('game-container');
 
-        // Creating Prize/victory zone property
+        // Creating the zone property where the player acquires the prize
         this.getPrize = new GetPrizeZone (this.gameScreen);
 
         // Variable for frame count
         this.frameCount = 0;
         
-        // Creating Deposit zone property
+        // Creating prize deposit zone property
         this.depositPrize = new DepositPrizeZone (this.gameScreen);
 
-        // Creating deathzone for second part of the level
-        this.deathZone = new DeathZone (this.gameScreen);
+        //might be deprecated, UNSURE
+        // // Creating deathzone for second part of the level
+        // this.deathZone = new DeathZone (this.gameScreen);
 
         // Player's life system
         this.lives = 3;
@@ -32,23 +33,6 @@ class Game {
         // Game State Boolean
         this.gameIsOver = false;
 
-        // Tracker if player is on top of an obstacle)
-        this.playerInObstacle = false;
-
-
-        // Creating the obstacles properties/arrays
-
-        this.obstaclesArray = [[], [], [], [], [], [], [], [], [], [], []];
-
-        //define the height and width we want to apply to the gameScreen once game is running 
-        this.height = 650;
-        this.width = 650;
-        
-        // gameScreen will by default have 0x 
-        // When variable game is assigned to Game class and initialized, the gameScreen will have the height and width defined above.
-        this.gameScreen.style.height = `${this.height}px`;
-        this.gameScreen.style.width = `${this.width}px`;
-
          // game over flag
          this.gameIsOver = false;
 
@@ -58,63 +42,91 @@ class Game {
         // Creating the player property
         this.player = new Player(this.gameScreen, 300, 600, 50, 50,"./images/test.png");
 
+        //might be deprecated, UNSURE
+        // Tracker if player is on top of an obstacle)
+        // this.playerInObstacle = false;
+
+
+        // Create the obstacles array of arrays
+        this.obstaclesArray = [[], [], [], [], [], [], [], [], [], [], []];
+
+        //define the height and width we want to apply to the gameScreen once game is running 
+        this.height = 660;
+        this.width = 650;
+        
+        // gameScreen will by default have 0x 
+        // When variable game is assigned to Game class and initialized, the gameScreen will have the height and width defined above.
+        this.gameScreen.style.height = `${this.height}px`;
+        this.gameScreen.style.width = `${this.width}px`;
     }
 
-    // function to start the game
+    // Method to start the game
     start(){     
 
-        // Change the correct "windows" to display and to disappear
+        // Change the  "windows" to display and to disappear
         this.startScreen.style.display = 'none';
         this.gameScreen.style.display = 'block';
         this.gameContainer.style.display = 'block';
 
-        // Run the gameloop to make the g
+        // Run the gameloop
         this.gameLoop();
     }
 
+    // Method of the gameloop
     gameLoop(){
-        // check if the game is over to interrupt the game loop
+
+        // checks if the game is over to interrupt the game loop, else is just runs the update method
         if(this.gameIsOver){
             return;
         } 
 
         this.update();
 
+        // javascript magic to make animations and the game update via frames
         window.requestAnimationFrame(()=>this.gameLoop());
+        // increased the frameCount variable by 1 each time it loops so we can store the current frame as the game is being played
         this.frameCount ++;
     }
 
+    // Method that handles the first 5 rows of obstacles (aka the cars)
+    // It handles spawns (pushing to obstaclesArray), collision with player and removal of obstacles once they are outside of specified boundaries. 
     updateGroupObjectsGround(arr, order){
-        // Check for collision and if an obstacle is still on the screen
+
+        // Check for collision and position of each obstacle in the given array
         for (let j = 0; j < arr.length; j++){
 
-            // Grabbing an obstacle and moving it downwards
+            // grabs an obstacle and runs its move method so they actively move throughout the screen
             const obstacle = arr[j];
             obstacle.move();
 
             // Check if the player collided with an obstacle
             if (this.player.didCollide(obstacle)){
-                // What happens when player hits obstacle
+
+                // player returns to his starting position
                 this.player.left = 300;
                 this.player.top = 600;
 
                 // Reduce player's life by 1
                 this.lives--;
+                // player loses the prize if he was carrying it
                 this.prizeInHand = false;
 
             }
 
-            // Check if the obstacle is off the screen ( at the bottom)
+            // Check if the obstacle is beyond the given boundaries (either left or right)
             else if(obstacle.left < -100 || obstacle.left+obstacle.width > 750){
+
                 // Remove the obstacle from the HTML
                 obstacle.element.remove();
 
-                // Remove the object from the array of obstacles
+                // Remove the object from the array
                 this.obstaclesArray[order].splice(j,1);
 
             }
         }
 
+        // with the method parameter "order", we specify which object we want to push at a given time and which array inside the main array do we want to push it to.
+        // we can control in with frame interval each obstacle spawns in their respective row and the max amount of objects per row
         if (order == 0){
             if (this.frameCount % 110 / (this.gamespeed*100)  === 0 && this.obstaclesArray[0].length < 3){
                 this.obstaclesArray[0].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 50, 550, 700, "left", "./images/Car1-test1.png"));
@@ -145,22 +157,27 @@ class Game {
         }
     }
 
+    // Method that handles the last 5 rows of obstacles (aka the trunks)(pain in the butt to finally get right)
+    // It handles spawns (pushing to obstaclesArray), collision with player and removal of obstacles once they are outside of specified boundaries. 
     updateGroupObjectsWater(arr, order, obstaclesArray) {
-        // Check for collision and if an obstacle is still on the screen
-      
+
+        // Check for collision and position of each obstacle in the given array
         for (let j = 0; j < arr.length; j++) {
-          // Grabbing an obstacle and moving it downwards
+            
+        // grabs an obstacle and runs its move method so they actively move throughout the screen
           const obstacle = arr[j];
           obstacle.move();
       
-          // Check if the obstacle is off the screen (at the bottom)
-          if (obstacle.left < -200 || obstacle.left + obstacle.width > 850) {
-            // Remove the obstacle from the HTML
-            obstacle.element.remove();
-      
-            // Remove the object from the array of obstacles
-            obstaclesArray[order].splice(j, 1);
-          }
+       // Check if the obstacle is beyond the given boundaries (either left or right)
+        if(obstacle.left < -200 || obstacle.left+obstacle.width > 850){
+
+        // Remove the obstacle from the HTML
+        obstacle.element.remove();
+
+        // Remove the object from the array
+        this.obstaclesArray[order].splice(j,1);
+
+    }
         }
       
         // UNCOMMENT IF TESTS DO NOT WORK
@@ -285,6 +302,9 @@ class Game {
             //     this.prizeInHand = false;
             //     return;
             // }
+
+         // with the method parameter "order", we specify which object we want to push at a given time and which array inside the main array do we want to push it to.
+        // we can control in with frame interval each obstacle spawns in their respective row and the max amount of objects per row
         if(order == 5){
             if (this.frameCount % 200 / (this.gamespeed*20) === 0 && this.obstaclesArray[5].length < 3){ 
                 this.obstaclesArray[5].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 150, 250, 650, "left", "./images/truck2.png"));
@@ -420,46 +440,46 @@ class Game {
     
 } */
 
-
+    // Method that runs each gameloop that ensures that the various systems of the game are updating as the loop goes
+    // this applies to score, lives, winning condition, losing condition and collision checks for the water zone.
     update (){
 
-        // Bonus: scores and lives
+        // Score and lives system
         let score = document.getElementById('score');
         let lives = document.getElementById('lives');
 
         score.innerHTML = this.score;
         lives.innerHTML = this.lives;
     
+        // End/lose the game if lives are 0
         if(this.lives <= 0){
             this.endGame();
         }
 
-
+        // End/win the game if the score has increased to 5
         if(this.score === 1){
             this.victoryGame();
         }
 
+        // Player's method for ensuring it stays inside of the gameScreen's boundaries
         this.player.stayInPlay();
-        // console.log("updating"); // just for tests
 
-
-        // console.log(this.prizeInHand); // just for tests
-
-        // Check if player got the prize
+        // Check to see if player has collided with the prize zone
         if (this.player.gotPrize(this.getPrize)){
 
-            // When player reaches prize area, the property turns true.
+            // If player did collide, then he will have the prize in hand.
             this.prizeInHand = true;
            
         }
         
+        // Running the methods for the first 5 rows of obstacles (cars)
         this.updateGroupObjectsGround(this.obstaclesArray[0], 0)
         this.updateGroupObjectsGround(this.obstaclesArray[1], 1)
         this.updateGroupObjectsGround(this.obstaclesArray[2], 2)
         this.updateGroupObjectsGround(this.obstaclesArray[3], 3)
         this.updateGroupObjectsGround(this.obstaclesArray[4], 4)
-
-        // UNCOMMENT IF TESTS DO NOT WORK
+        
+        // Running the methods for the first 5 rows of obstacles (trunks)
         this.updateGroupObjectsWater(this.obstaclesArray[5], 5, this.obstaclesArray)
         this.updateGroupObjectsWater(this.obstaclesArray[6], 6, this.obstaclesArray)
         this.updateGroupObjectsWater(this.obstaclesArray[7], 7, this.obstaclesArray)
@@ -519,19 +539,16 @@ class Game {
         //     this.lives--;
         // }
 
-        // // Check if player deposited the prize
+        // Check if player has prize in hand and has reached the deposit zone (aka starting zone)
         if (this.prizeInHand === true && this.player.touchDepositArea(this.depositPrize) === true){
 
-            // When player reaches the deposit area, remove prize in hand aka becomes false and add to total score.
+            // When player reaches the deposit zone, remove prize in hand, add to total score and increase the overall speed of all obstacles.
             this.prizeInHand = false;
             this.score ++;
             this.gamespeed += 0.2;
             console.log (`Game speed has now been increased to${this.gamespeed}`);
-            // console.log(`current score is ${this.score}`);
-
-            // console.log("Deposited Prize"); // just for tests
-
         }
+
         // Provide a visual white background color for when player has the prize in hand and can deposit
         if(this.prizeInHand === true){           
             this.player.element.style.backgroundColor = "white";
@@ -542,9 +559,10 @@ class Game {
          }
     }
 
-
+    // Method that ends the game
     endGame(){
-        // Remove player
+
+        // Removes player
         this.player.element.remove();
 
         // Remove all obstacles from the array of obstacles
@@ -557,19 +575,20 @@ class Game {
             
         });
 
+        // variable becomes true
         this.gameIsOver = true;
 
-        // Remvoe the game screen
+        // gameScreen and container are no longer displayed
         this.gameScreen.style.display ='none';
-
         this.gameContainer.style.display ='none';
-
 
         // show end game screen
         this.endScreen.style.display = 'block';
     }
 
+    // method for victory screen
     victoryGame(){
+
         // Remove player
         this.player.element.remove();
 
@@ -583,15 +602,15 @@ class Game {
             
         });
 
+        // variable becomes true
         this.gameIsOver = true;
 
-        // Remvoe the game screen
+        // gameScreen and container are no longer displayed
         this.gameScreen.style.display ='none';
-
         this.gameContainer.style.display ='none';
 
 
-        // show end game screen
+        // show victory game screen
         this.victoryScreen.style.display = 'block';
     }
 

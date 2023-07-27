@@ -30,6 +30,9 @@ class Game {
         // Player's score system
         this.score = 0;
 
+        // Visual queue for the score
+        this.scoreArray = [];
+
         // Game State Boolean
         this.gameIsOver = false;
 
@@ -129,24 +132,24 @@ class Game {
         // we can control in with frame interval each obstacle spawns in their respective row and the max amount of objects per row
         if (order == 0){
             if (this.frameCount % 110 / (this.gamespeed*100)  === 0 && this.obstaclesArray[0].length < 3){
-                this.obstaclesArray[0].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 50, 550, 700, "left", "./images/Car1-test1.png"));
+                this.obstaclesArray[0].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 50, 550, 700, "left", "./images/Car1-test2-green.png"));
             }
         }
         else if(order == 1){
             if (this.frameCount % 130 / (this.gamespeed*100)  === 0 && this.obstaclesArray[1].length < 3){ 
-                this.obstaclesArray[1].push(new Obstacle(this.gameScreen, 1.5 * this.gamespeed, 50, 50, 500, -100, "right", "./images/Car1-test1.png"));
+                this.obstaclesArray[1].push(new Obstacle(this.gameScreen, 1.5 * this.gamespeed, 50, 50, 500, -100, "right", "./images/Car1-test2.orange.png"));
             }
         }
 
         else if(order == 2){
             if (this.frameCount % 130 / (this.gamespeed*100)  === 0 && this.obstaclesArray[2].length < 3){ 
-                this.obstaclesArray[2].push(new Obstacle(this.gameScreen, 2.5 * this.gamespeed, 50, 50, 450, 700, "left", "./images/Car1-test2.png"));
+                this.obstaclesArray[2].push(new Obstacle(this.gameScreen, 2.5 * this.gamespeed, 50, 50, 450, 700, "left", "./images/Car1-test2-blue2.png"));
             }
         }
 
         else if(order == 3){
             if (this.frameCount % 200 / (this.gamespeed*100)  === 0 && this.obstaclesArray[3].length < 3){ 
-                this.obstaclesArray[3].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 50, 400, -100, "right", "./images/Car1-test2.png"));
+                this.obstaclesArray[3].push(new Obstacle(this.gameScreen, 2 * this.gamespeed, 50, 50, 400, -100, "right", "./images/Car1-test2-yellow.png"));
             }
         }
 
@@ -456,8 +459,8 @@ class Game {
             this.endGame();
         }
 
-        // End/win the game if the score has increased to 5
-        if(this.score === 1){
+
+        if(this.score === 5){
             this.victoryGame();
         }
 
@@ -471,6 +474,22 @@ class Game {
             this.prizeInHand = true;
            
         }
+
+        // Add score to the score array
+        if (this.score === 1 && this.scoreArray.length === 0){
+            this.scoreArray.push(new Pastel(this.gameScreen, 50, 50, 595, 0,  "./images/pastel.png"));
+        }
+        if (this.score === 2 && this.scoreArray.length === 1){
+            this.scoreArray.push(new Pastel(this.gameScreen, 50, 50, 595, 50,  "./images/pastel.png"));
+        }
+        if (this.score === 3 && this.scoreArray.length === 2){
+            this.scoreArray.push(new Pastel(this.gameScreen, 50, 50, 595, 100,  "./images/pastel.png"));
+        }
+        if (this.score === 4 && this.scoreArray.length === 3){
+            this.scoreArray.push(new Pastel(this.gameScreen, 50, 50, 595, 150,  "./images/pastel.png"));
+        }
+
+
         
         // Running the methods for the first 5 rows of obstacles (cars)
         this.updateGroupObjectsGround(this.obstaclesArray[0], 0)

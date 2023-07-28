@@ -114,6 +114,7 @@ class Game {
                 this.lives--;
                 // player loses the prize if he was carrying it
                 this.prizeInHand = false;
+                damageSound.play();
 
             }
 
@@ -243,7 +244,7 @@ class Game {
         }
 
 
-        if(this.score === 5){
+        if(this.score === 3){
             this.victoryGame();
         }
 
@@ -259,22 +260,6 @@ class Game {
 
            
         }
-
-        // Add score to the score array
-        if (this.score === 1 && this.scoreArray.length === 0){
-            this.scoreArray.push(new Pastel(this.gameContainer, 85, 85, 796, 515,  "./images/pastel.png"));
-        }
-        if (this.score === 2 && this.scoreArray.length === 1){
-            this.scoreArray.push(new Pastel(this.gameContainer, 85, 85, 796, 565,  "./images/pastel.png"));
-        }
-        if (this.score === 3 && this.scoreArray.length === 2){
-            this.scoreArray.push(new Pastel(this.gameContainer, 85, 85, 796, 615,  "./images/pastel.png"));
-        }
-        if (this.score === 4 && this.scoreArray.length === 3){
-            this.scoreArray.push(new Pastel(this.gameContainer, 85, 85, 796, 665,  "./images/pastel.png"));
-        }
-
-
         
         // Running the methods for the first 5 rows of obstacles (cars)
         this.updateGroupObjectsGround(this.obstaclesArray[0], 0)
@@ -320,6 +305,8 @@ class Game {
             this.lives--;
             this.prizeInHand = false;
             collisionCheck = false;
+            this.player.element.src = "/images/character.png";
+            damageSound.play();
         }
 
         // Check the amount of player lives to remove a heart image
@@ -332,6 +319,26 @@ class Game {
 
         }
 
+        // Check the ammount of pastéis de nata to add them
+        if(this.score === 1){
+            document.getElementById("pastel-1").style.display = "block";
+        }
+        else if (this.score === 2){
+            document.getElementById("pastel-1").style.display = "block";
+            document.getElementById("pastel-2").style.display = "block";
+        }
+        else if (this.score === 3){
+            document.getElementById("pastel-1").style.display = "block";
+            document.getElementById("pastel-2").style.display = "block";
+            document.getElementById("pastel-3").style.display = "block";
+        }
+        else if (this.score === 4){
+            document.getElementById("pastel-1").style.display = "block";
+            document.getElementById("pastel-2").style.display = "block";
+            document.getElementById("pastel-3").style.display = "block";
+            document.getElementById("pastel-4").style.display = "block";
+        }
+
         // Check if player has prize in hand and has reached the deposit zone (aka starting zone)
         if (this.prizeInHand === true && this.player.touchDepositArea(this.depositPrize) === true){
 
@@ -340,6 +347,7 @@ class Game {
             this.score ++;
             this.gamespeed += 0.2;
             this.player.element.src = "/images/character.png";
+            successSound.play()
             console.log (`Game speed has now been increased to${this.gamespeed}`);
         }
 
@@ -399,6 +407,17 @@ class Game {
 
         // show victory game screen
         this.victoryScreen.style.display = 'block';
+
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
+
+        let victoryMusic = new Audio('./audio/victory.wav')
+        victoryMusic.play();
     }
 
 }
+
+let backgroundMusic = new Audio('./audio/backgroundSong.wav');
+let damageSound = new Audio('./audio/damage.wav');
+let pastelSound = new Audio('./audio/pastel.wav');
+let successSound = new Audio('./audio/success.wav');

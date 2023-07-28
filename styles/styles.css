@@ -107,8 +107,6 @@ main {
     background-color: rgb(54, 54, 54);
     position: absolute;
     overflow: hidden;
-    margin-top: 40px;
-    margin-left: 125px;
     width: 650px;
     height: 650px;
     background-image: url("../images/gameScreen.png");
@@ -123,6 +121,7 @@ main {
 
 #end-screen {
     display: none;
+    margin-top: 300px;
 
 }
 #victory-screen{
@@ -217,10 +216,28 @@ main {
     text-align: center;
 }
 
-#pasteis-counter {
-    margin: 723px 705px 0 0;
-  
+#pasteis {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    margin-left: 50px;
+    margin-top: 718px;
+    text-align: center;
+}
 
+#pasteis-counter {
+    margin: 0 10px 0 0;
+    text-align: center;
+}
+
+#pasteis-counter img {
+    margin-right: 10px;
+    height: 40px;
+}
+
+#pastel-1, #pastel-2, #pastel-3, #pastel-4 {
+    display:none;
 }
 
 #instructions-screen ul {
@@ -262,4 +279,3 @@ main {
 #obstacles{
     z-index: 1;
 }
-

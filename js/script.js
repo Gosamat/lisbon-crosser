@@ -74,22 +74,22 @@ const possibleKeystrokes = [
         switch(key){
           case "ArrowLeft":
           game.player.left += -50;
-          game.player.element.src = "./images/characterLeft.png";
+          game.player.element.src = "../images/characterLeft.png";
           break;
           
           case "ArrowUp":
           game.player.top += -50;
-          game.player.element.src = "./images/characterBack.png"
+          game.player.element.src = "../images/characterBack.png"
           break;
 
           case "ArrowRight":
           game.player.left += 50;
-          game.player.element.src = "./images/characterRight.png"
+          game.player.element.src = "../images/characterRight.png"
           break;
 
           case "ArrowDown":
           game.player.top += 50;
-          game.player.element.src = "./images/character.png"
+          game.player.element.src = "../images/character.png"
           break;
 
         }
@@ -98,25 +98,25 @@ const possibleKeystrokes = [
         switch(key){
           case "ArrowLeft":
           game.player.left += -50;
-          game.player.element.src = "./images/characterLeftPastel.png";
+          game.player.element.src = "../images/characterLeftPastel.png";
 
           break;
           
           case "ArrowUp":
           game.player.top += -50;
-          game.player.element.src = "./images/characterBackPastel.png"
+          game.player.element.src = "../images/characterBackPastel.png"
 
           break;
 
           case "ArrowRight":
           game.player.left += 50;
-          game.player.element.src = "./images/characterRightPastel.png"
+          game.player.element.src = "../images/characterRightPastel.png"
 
           break;
 
           case "ArrowDown":
           game.player.top += 50;
-          game.player.element.src = "./images/characterPastel.png"
+          game.player.element.src = "../images/characterPastel.png"
 
           break;
 

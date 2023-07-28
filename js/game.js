@@ -256,7 +256,7 @@ class Game {
 
             // If player did collide, then he will have the prize in hand.
             this.prizeInHand = true;
-            this.player.element.src = "/images/characterBackPastel.png";
+            this.player.element.src = "./images/characterBackPastel.png";
 
            
         }
@@ -305,7 +305,7 @@ class Game {
             this.lives--;
             this.prizeInHand = false;
             collisionCheck = false;
-            this.player.element.src = "/images/character.png";
+            this.player.element.src = "./images/character.png";
             damageSound.play();
         }
 
@@ -346,7 +346,7 @@ class Game {
             this.prizeInHand = false;
             this.score ++;
             this.gamespeed += 0.2;
-            this.player.element.src = "/images/character.png";
+            this.player.element.src = "./images/character.png";
             successSound.play()
             console.log (`Game speed has now been increased to${this.gamespeed}`);
         }

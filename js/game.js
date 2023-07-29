@@ -42,7 +42,7 @@ class Game {
          this.prizeInHand = false;
          
         // Creating the player property
-        this.player = new Player(this.gameScreen, 300, 600, 50, 50);
+        this.player = new Player(this.gameScreen, 300, 600, 50, 50, "./images/characterBack.png");
 
         //might be deprecated, UNSURE
         // Tracker if player is on top of an obstacle)

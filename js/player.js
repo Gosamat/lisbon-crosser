@@ -1,6 +1,6 @@
 class Player {
     
-    constructor( gameScreen, left, top, width, height){
+    constructor( gameScreen, left, top, width, height, imgSrc){
         
         this.gameScreen = gameScreen;   
 
@@ -17,7 +17,7 @@ class Player {
         this.element = document.createElement('img');
         this.element.setAttribute("id", "player");
         this.element.style.position = 'absolute';
-        this.element.src = "./images/characterBack.png";
+        this.element.src = imgSrc;
         //  set up default element's properties
         this.element.style.width = `${width}px`;
         this.element.style.height = `${height}px`;
